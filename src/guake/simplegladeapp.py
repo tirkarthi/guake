@@ -70,7 +70,7 @@ def bindtextdomain(app_name, locale_dir=None):
         gtk.glade.bindtextdomain(app_name, locale_dir)
         gtk.glade.textdomain(app_name)
         gettext.install(app_name, locale_dir, unicode=1)
-    except (IOError, locale.Error), e:
+    except (IOError, locale.Error) as e:
         print("Warning", app_name, e)
         __builtins__.__dict__["_"] = lambda x: x
 
@@ -202,7 +202,7 @@ class SimpleGladeApp(object):
 
         is_method = lambda t: callable(t[1])
         is_prefix_action = lambda t: t[0].startswith(prefix_s)
-        drop_prefix = lambda (k, w): (k[prefix_pos:], w)
+        drop_prefix = lambda k, w: (k[prefix_pos:], w)
 
         members_t = inspect.getmembers(prefix_actions_proxy)
         methods_t = filter(is_method, members_t)

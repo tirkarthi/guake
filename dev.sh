@@ -11,10 +11,15 @@ echo "execute guake for developer."
 echo "use --no-install to avoid installing guake on your system"
 echo "(beware, gconf schema will be altered)"
 echo "use --reinstall to force complete reinstall"
+echo "use --unnstall to force complete reinstall"
 echo "use --update-po to force update translations"
 
 if [[ $1 == "--install" ]]; then
     NO_INSTALL=false
+fi
+
+if [[ $1 == "--uninstall" ]]; then
+    UNINSTALL=true
 fi
 
 if [[ $1 == "--reinstall" ]]; then
@@ -43,6 +48,11 @@ if [[ $EXEC_AUTOGEN == true ]]; then
     ./autogen.sh
 fi
 
+if [[ $UNINSTALL == true ]]; then
+    sudo make uninstall
+    exit 1
+fi
+
 make || exit 1
 if [[ $EXEC_UPDATE_PO == true ]]; then
     cd po
@@ -53,7 +63,7 @@ fi
 
 if [[ $NO_INSTALL == true ]]; then
     gconftool-2 --install-schema-file=data/guake.schemas
-    PYTHONPATH=src python src/guake/main.py --no-startup-script
+    PYTHONPATH=src python2.7 src/guake/main.py --no-startup-script
 else
   sudo make install && gconftool-2 --install-schema-file=/usr/local/etc/gconf/schemas/guake.schemas || exit 1
 

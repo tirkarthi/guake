@@ -424,6 +424,18 @@
                 <long>Any terminal program can set the terminal's title via special escape sequences. Some shells (e.g. bash) display user's prompt there (though you can adjust that to any arbitrary text in bashrc or similar) and update it automatically as the prompt changes. So you can have easy automatically updating meaningful tab titles with this option turned on.</long>
             </locale>
         </schema>
+        
+        <schema>
+            <key>/schemas/apps/guake/general/max_tab_name_length</key>
+            <applyto>/apps/guake/general/max_tab_name_length</applyto>
+            <owner>guake</owner>
+            <type>int</type>
+            <default>0</default>
+            <locale name="C">
+                <short>Set max length of the tabs names</short>
+                <long>Controls the maximum length of the tabs names. Maximum length: 100, Minimum length: 1. 0 = unlimited length.</long>
+            </locale>
+        </schema>
 
         <schema>
             <key>/schemas/apps/guake/style/cursor_blink_mode</key>
@@ -581,6 +593,18 @@
                 <short>Keybinding to show/hide guake.</short>
                 <long>Global keybinding to allow user call guake from each
                 place after it's opened without clicks.</long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/guake/keybindings/local/reset_terminal</key>
+            <applyto>/apps/guake/keybindings/local/reset_terminal</applyto>
+            <owner>guake</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Reset</short>
+                <long>Reset terminal</long>
             </locale>
         </schema>
 
@@ -894,7 +918,19 @@
                 <long>Decrease the terminal transparency.</long>
             </locale>
         </schema>
-
+        
+        <schema>
+            <key>/schemas/apps/guake/keybindings/local/toggle_transparency</key>
+            <applyto>/apps/guake/keybindings/local/toggle_transparency</applyto>
+            <owner>guake</owner>
+            <type>string</type>
+            <default>&lt;Control&gt;Alt&gt;T</default>
+            <locale name="C">
+                <short>Toggle transparency.</short>
+                <long>Toggle the terminal transparency from the actual level to 100% and vice versa.</long>
+            </locale>
+        </schema>
+        
         <schema>
             <key>/schemas/apps/guake/keybindings/local/clipboard_copy</key>
             <applyto>/apps/guake/keybindings/local/clipboard_copy</applyto>
@@ -936,7 +972,7 @@
             <applyto>/apps/guake/keybindings/local/toggle_hide_on_lose_focus</applyto>
             <owner>guake</owner>
             <type>string</type>
-            <default>&lt;Control&gt;F1</default>
+            <default>&lt;Control&gt;&lt;Shift&gt;h</default>
             <locale name="C">
                 <short>Toggle hide on lose focus.</short>
                 <long>Toggle whether guake will hide when it loses focus.</long>

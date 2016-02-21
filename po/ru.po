@@ -5,19 +5,20 @@
 # Translators:
 # Pavel Alexeev <pahan@hubbitus.info>, 2010.
 # Notes and help by Igor (nick igorsub) <igor6130@gmail.com>, 2010
+# Ivan Komaritsyn <vantu5z@mail.ru>, 2015.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Guake 0.4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-27 13:39+0200\n"
-"PO-Revision-Date: 2010-01-25 20:29+0300\n"
-"Last-Translator: Pavel Alexeev <pahan@hubbitus.info>\n"
-"Language-Team: Russian<guake@lists.guake.org>\n"
+"POT-Creation-Date: 2015-12-01 16:49+0100\n"
+"PO-Revision-Date: 2015-10-06 16:43+0300\n"
+"Last-Translator: Ivan Komaritsyn <vantu5z@mail.ru>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
@@ -26,22 +27,18 @@ msgid "About Guake"
 msgstr "О Guake"
 
 #: ../data/about.glade.h:2
-#, fuzzy
 msgid ""
 "Copyright 2013-2015 Gaetan Semet\n"
 "Copyright 2007-2010 Lincoln de Sousa\n"
 "Copyright 2007 Gabriel Falc&#xE3;o"
 msgstr ""
-"Copyright 2007-2009 Lincoln de Sousa\n"
-"Copyright 2007 Gabriel Falc&#xE3;o"
 
 #: ../data/about.glade.h:5
-#, fuzzy
 msgid ""
 "Guake is an easy to access\n"
 "terminal based on FPS games terminal"
 msgstr ""
-"Guake это терминал быстрого доступа\n"
+"Guake это терминал с быстрым доступом\n"
 "наподобие тех, что используются в играх"
 
 #: ../data/about.glade.h:7
@@ -74,7 +71,6 @@ msgstr ""
 "St, Fifth Floor, Boston, MA  02110-1301 USA\n"
 
 #: ../data/about.glade.h:13
-#, fuzzy
 msgid ""
 "Adolfo González Blázquez <code@infinicode.org> Spanish\n"
 "Lincoln de Sousa <lincoln@guake.org> Brazilian Portuguese\n"
@@ -86,13 +82,6 @@ msgid ""
 "Sangwoo Joo <sangwoojoo@naver.com> Korean\n"
 "    "
 msgstr ""
-"Adolfo González Blázquez <code@infinicode.org> Spanish\n"
-"Lincoln de Sousa <lincoln@guake.org> Brazilian Portuguese\n"
-"Markus Majer <mm@mpathy.de> German\n"
-"Mieszko Ślusarczyk <mieszkoslusarczyk@gmail.com> Polish\n"
-"Nishio Futoshi <futoshi@momonga-linux.org> Japanese\n"
-"Pavel Alexeev <Pahan@Hubbitus.spb.su> Russian\n"
-"Piotr Drąg <piotrdrag@gmail.com> Polish"
 
 #: ../data/guake.glade.h:1
 msgid "Copy"
@@ -108,54 +97,55 @@ msgstr "Полноэкранный режим"
 
 #: ../data/guake.glade.h:4
 msgid "Save to File..."
-msgstr ""
+msgstr "Сохранить в файл..."
 
 #: ../data/guake.glade.h:5
-msgid "Find..."
-msgstr ""
+msgid "Reset terminal"
+msgstr "Сброс терминала"
 
 #: ../data/guake.glade.h:6
-#, fuzzy
+msgid "Find..."
+msgstr "Найти..."
+
+#: ../data/guake.glade.h:7
 msgid "New Tab"
 msgstr "Новая вкладка"
 
-#: ../data/guake.glade.h:7
-#, fuzzy
+#: ../data/guake.glade.h:8
 msgid "Rename Tab"
 msgstr "Переименовать вкладку"
 
-#: ../data/guake.glade.h:8
+#: ../data/guake.glade.h:9
 msgid "Close Tab"
 msgstr "Закрыть вкладку"
 
-#: ../data/guake.glade.h:9
-msgid "Open link..."
-msgstr ""
-
 #: ../data/guake.glade.h:10
-msgid "Search on Web"
-msgstr ""
+msgid "Open link..."
+msgstr "Открыть ссылку..."
 
 #: ../data/guake.glade.h:11
+msgid "Search on Web"
+msgstr "Искать в Интернете"
+
+#: ../data/guake.glade.h:12
 msgid "Quit"
 msgstr "Выход"
 
-#: ../data/guake.glade.h:12
+#: ../data/guake.glade.h:13
 msgid "Rename"
 msgstr "Переименовать"
 
-#: ../data/guake.glade.h:13
+#: ../data/guake.glade.h:14
 msgid "Close"
 msgstr "Закрыть"
 
-#: ../data/guake.glade.h:14
+#: ../data/guake.glade.h:15
 msgid "Guake!"
 msgstr "Guake!"
 
-#: ../data/guake.glade.h:15
-#, fuzzy
+#: ../data/guake.glade.h:16
 msgid "Add a new tab"
-msgstr "Новая вкладка"
+msgstr "Добавить новую вкладку"
 
 #: ../data/prefs.glade.h:1
 msgid "Guake Preferences"
@@ -186,6 +176,17 @@ msgid ""
 "guake -r \"main\" -e \"cd ~/projects/myproject/main\"\n"
 "guake -r \"prod\" -e \"cd ~/projects/myproject/prod\"\n"
 msgstr ""
+"Путь к bash-скрипту, который будет автоматически запущен при старте Guake, "
+"если не указано --no-startup-script.\n"
+"\n"
+"Обычно используется возможность настройки Guake с помощью командной строки:\n"
+"\n"
+"#!/bin/bash\n"
+"\n"
+"sleep 5  # советуется подождать немного пока Guake не запустится полностью\n"
+"\n"
+"guake -r \"main\" -e \"cd ~/projects/myproject/main\"\n"
+"guake -r \"prod\" -e \"cd ~/projects/myproject/prod\"\n"
 
 #: ../data/prefs.glade.h:15
 msgid "Enable popup notifications on startup"
@@ -196,26 +197,24 @@ msgid "Show tray icon"
 msgstr "Показывать иконку в трее"
 
 #: ../data/prefs.glade.h:17
-#, fuzzy
 msgid "Always prompt on quit"
-msgstr "Спрашивать при выходе"
+msgstr "Всегда спрашивать при выходе"
 
 #: ../data/prefs.glade.h:18
 msgid "_Flash terminal on bell"
-msgstr ""
+msgstr "Моргать терминалом при звонке"
 
 #: ../data/prefs.glade.h:19
 msgid "_Play system alert sound on bell"
-msgstr ""
+msgstr "Воспроизводить системный сигнал при звонке"
 
 #: ../data/prefs.glade.h:20
 msgid "Path to script executed on Guake start:"
-msgstr ""
+msgstr "Путь к скрипту, запускаемому при старте Guake:"
 
 #: ../data/prefs.glade.h:21
-#, fuzzy
 msgid "Prompt on close tab:"
-msgstr "Спрашивать при выходе"
+msgstr "Спрашивать при закрытии вкладки:"
 
 #: ../data/prefs.glade.h:22
 msgid ""
@@ -223,6 +222,9 @@ msgid ""
 "With process running\n"
 "Always"
 msgstr ""
+"Никогда\n"
+"С запущенным процессом\n"
+"Всегда"
 
 #: ../data/prefs.glade.h:25
 msgid "<b>General</b>"
@@ -230,25 +232,23 @@ msgstr "<b>Основное</b>"
 
 #: ../data/prefs.glade.h:26
 msgid "Bottom align window instead of top align"
-msgstr ""
+msgstr "Прижимать к низу экрана"
 
 #: ../data/prefs.glade.h:27
 msgid "Appear on mouse display"
-msgstr ""
+msgstr "Показывать на текущем экране"
 
 #: ../data/prefs.glade.h:28
 msgid "Appear on display:"
-msgstr ""
+msgstr "Показывать на экране:"
 
 #: ../data/prefs.glade.h:29
-#, fuzzy
 msgid "Place tabs on top"
-msgstr "Поверх всех окон"
+msgstr "Расположить вкладки сверху"
 
 #: ../data/prefs.glade.h:30
-#, fuzzy
 msgid "<b>Placement</b>"
-msgstr "<b>Палитра</b>"
+msgstr "<b>Расположение</b>"
 
 #: ../data/prefs.glade.h:31
 msgid "Stay on top"
@@ -256,217 +256,225 @@ msgstr "Поверх всех окон"
 
 #: ../data/prefs.glade.h:32
 msgid "Use VTE titles for tab names"
-msgstr ""
+msgstr "Использовать заголовки VTE для названий вкладок"
 
 #: ../data/prefs.glade.h:33
+msgid "Max tab name length:"
+msgstr ""
+
+#: ../data/prefs.glade.h:34
 msgid "Hide on lose focus"
 msgstr "Прятать при потере фокуса"
 
-#: ../data/prefs.glade.h:34
+#: ../data/prefs.glade.h:35
 msgid "Show tab bar"
 msgstr "Показывать панель вкладок"
 
-#: ../data/prefs.glade.h:35
-#, fuzzy
-msgid "Start fullscreen"
-msgstr "Полноэкранный режим"
-
 #: ../data/prefs.glade.h:36
+msgid "Start fullscreen"
+msgstr "Запускать в полноэкранном режиме"
+
+#: ../data/prefs.glade.h:37
 msgid "<b>Main Window</b>"
 msgstr "<b>Основное окно</b>"
 
-#: ../data/prefs.glade.h:37
-msgid "Left"
-msgstr ""
-
 #: ../data/prefs.glade.h:38
-msgid "Center"
-msgstr ""
+msgid "Left"
+msgstr "Слева"
 
 #: ../data/prefs.glade.h:39
-msgid "Right"
-msgstr ""
+msgid "Center"
+msgstr "По центру"
 
 #: ../data/prefs.glade.h:40
-#, fuzzy
-msgid "<b>Main Window Horizontal Alignment</b>"
-msgstr "<b>Высота основного окна</b>"
+msgid "Right"
+msgstr "Справа"
 
 #: ../data/prefs.glade.h:41
-#, fuzzy
+msgid "<b>Main Window Horizontal Alignment</b>"
+msgstr "<b>Выравнивание по горизонтали</b>"
+
+#: ../data/prefs.glade.h:42
 msgid "<b>Main Window Height</b>"
 msgstr "<b>Высота основного окна</b>"
 
-#: ../data/prefs.glade.h:42
-#, fuzzy
-msgid "<b>Main Window Width</b>"
-msgstr "<b>Высота основного окна</b>"
-
 #: ../data/prefs.glade.h:43
-msgid "Custom command file path: "
-msgstr ""
+msgid "<b>Main Window Width</b>"
+msgstr "<b>Ширина основного окна</b>"
 
 #: ../data/prefs.glade.h:44
-msgid "Please select a json file"
-msgstr ""
+msgid "Custom command file path: "
+msgstr "Путь к пользовательской команде"
 
 #: ../data/prefs.glade.h:45
+msgid "Please select a json file"
+msgstr "Выберите файл json"
+
+#: ../data/prefs.glade.h:46
 msgid "General"
 msgstr "Общие"
 
-#: ../data/prefs.glade.h:46
+#: ../data/prefs.glade.h:47
 msgid "Default interpreter:"
 msgstr "Интерпретатор по умолчанию:"
 
-#: ../data/prefs.glade.h:47
+#: ../data/prefs.glade.h:48
 msgid "_Run command as a login shell"
 msgstr "_Запустить команду как шелл входа"
 
-#: ../data/prefs.glade.h:48
+#: ../data/prefs.glade.h:49
 msgid "_Open new tab in current directory"
 msgstr "_Открыть новую вкладку в текущей директории"
 
-#: ../data/prefs.glade.h:49
+#: ../data/prefs.glade.h:50
 msgid "<b>Shell</b>"
 msgstr "<b>Шелл</b>"
 
-#: ../data/prefs.glade.h:50
-msgid "Shell"
-msgstr ""
-
 #: ../data/prefs.glade.h:51
+msgid "Shell"
+msgstr "Шелл"
+
+#: ../data/prefs.glade.h:52
 msgid "Show scrollbar"
 msgstr "Показывать полосу прокрутки"
 
-#: ../data/prefs.glade.h:52
+#: ../data/prefs.glade.h:53
 msgid "Scrollback lines:"
 msgstr "Строк прокрутки:"
 
-#: ../data/prefs.glade.h:53
+#: ../data/prefs.glade.h:54
 msgid "On output"
 msgstr "На вывод"
 
-#: ../data/prefs.glade.h:54
+#: ../data/prefs.glade.h:55
 msgid "On key stroke"
 msgstr "На нажатие клавиши"
 
-#: ../data/prefs.glade.h:55
-msgid "<b>Scroll</b>"
-msgstr "<b>Скроллинг</b>"
-
 #: ../data/prefs.glade.h:56
+msgid "<b>Scroll</b>"
+msgstr "<b>Прокрутка</b>"
+
+#: ../data/prefs.glade.h:57
 msgid "Scrolling"
 msgstr "Прокрутка"
 
-#: ../data/prefs.glade.h:57
+#: ../data/prefs.glade.h:58
 msgid "Use the system fixed width font"
 msgstr "Использовать системный шрифт фиксированного размера"
 
-#: ../data/prefs.glade.h:58
+#: ../data/prefs.glade.h:59
 msgid "Font:"
 msgstr "Шрифт:"
 
-#: ../data/prefs.glade.h:59
+#: ../data/prefs.glade.h:60
 msgid "Choose some font"
 msgstr "Выберите шрифт"
 
-#: ../data/prefs.glade.h:60
+#: ../data/prefs.glade.h:61
 msgid "Text color:"
 msgstr "Цвет текста:"
 
-#: ../data/prefs.glade.h:61
+#: ../data/prefs.glade.h:62
 msgid "Background color:"
 msgstr "Цвет фона:"
 
-#: ../data/prefs.glade.h:62
-msgid "Cursor shape:"
-msgstr ""
-
 #: ../data/prefs.glade.h:63
+msgid "Cursor shape:"
+msgstr "Вид курсора:"
+
+#: ../data/prefs.glade.h:64
 msgid ""
 "Block\n"
 "I-Beam\n"
 "Underline"
 msgstr ""
+"Блок\n"
+"I-Вид\n"
+"Подчёркивание"
 
-#: ../data/prefs.glade.h:66
+#: ../data/prefs.glade.h:67
 msgid ""
 "Follow GTK+ setting\n"
 "Blink on\n"
 "Blink off"
 msgstr ""
-
-#: ../data/prefs.glade.h:69
-msgid "Cursor blink mode:"
-msgstr ""
+"Использовать настройки GTK+\n"
+"Моргать\n"
+"Не моргать"
 
 #: ../data/prefs.glade.h:70
-msgid "Allow bold font"
-msgstr ""
+msgid "Cursor blink mode:"
+msgstr "Режим отображения курсора:"
 
 #: ../data/prefs.glade.h:71
+msgid "Allow bold font"
+msgstr "Разрешить жирный шрифт"
+
+#: ../data/prefs.glade.h:72
 msgid "<b>Palette</b>"
 msgstr "<b>Палитра</b>"
 
-#: ../data/prefs.glade.h:72
+#: ../data/prefs.glade.h:73
 msgid "Built-in schemes:"
 msgstr "Встроенные схемы:"
 
-#: ../data/prefs.glade.h:73
+#: ../data/prefs.glade.h:74
 msgid "Color palette:"
 msgstr "Цветовая палитра:"
 
-#: ../data/prefs.glade.h:74
-#, fuzzy
-msgid "Font color"
-msgstr "Цвет текста:"
-
 #: ../data/prefs.glade.h:75
-#, fuzzy
-msgid "Background color"
-msgstr "Цвет фона:"
+msgid "Font color"
+msgstr "Цвет текста"
 
 #: ../data/prefs.glade.h:76
-msgid "Use font and background color from the palette"
-msgstr ""
+msgid "Background color"
+msgstr "Цвет фона"
 
 #: ../data/prefs.glade.h:77
-msgid "Demo:"
-msgstr ""
+msgid "Use font and background color from the palette"
+msgstr "Использовать цвет текста и фона из палитры"
 
 #: ../data/prefs.glade.h:78
+msgid "Demo:"
+msgstr "Пример:"
+
+#: ../data/prefs.glade.h:79
 msgid "<b>Effects</b>"
 msgstr "<b>Воздействие</b>"
 
-#: ../data/prefs.glade.h:79
+#: ../data/prefs.glade.h:80
 msgid "Transparency:"
 msgstr "Прозрачность:"
 
-#: ../data/prefs.glade.h:80
+#: ../data/prefs.glade.h:81
 msgid "Background image:"
 msgstr "Фоновое изображение:"
 
-#: ../data/prefs.glade.h:81
+#: ../data/prefs.glade.h:82
 msgid "Appearance"
 msgstr "Оформление"
 
-#: ../data/prefs.glade.h:82
+#: ../data/prefs.glade.h:83
 msgid ""
 "<small>Quick open is a feature allowing you to open a file directly into "
 "your favorite text editor by clicking on its filename when it appears in "
 "your terminal. See the list of currently supported text patterns used to "
 "extract filename below.</small>"
 msgstr ""
-
-#: ../data/prefs.glade.h:83
-msgid "Enable Quick Open when Ctrl+clicking on a filename in the terminal"
-msgstr ""
+"<small>Быстрое открытие - это функция позволяющая открыть файл в текстовом "
+"редакторе с помощью нажатия на его имени в терминале. Список поддерживаемых "
+"на данный момент конструкций имён файлов смотри ниже.</small>"
 
 #: ../data/prefs.glade.h:84
-msgid "Editor command line:"
+msgid "Enable Quick Open when Ctrl+clicking on a filename in the terminal"
 msgstr ""
+"Разрешить \"Быстрое открытие\" по Ctrl+click на имени файла в терминале"
 
-#: ../data/prefs.glade.h:86
+#: ../data/prefs.glade.h:85
+msgid "Editor command line:"
+msgstr "Команда для Редактора"
+
+#: ../data/prefs.glade.h:87
 #, no-c-format
 msgid ""
 "<small><i>Use the following elements in the open editor command line:\n"
@@ -477,37 +485,48 @@ msgid ""
 "For example, for sublime, use <b>subl %(file_path)s:%(line_number)s</b>\n"
 "</i></small>"
 msgstr ""
-
-#: ../data/prefs.glade.h:92
-msgid "Quick open in current terminal"
-msgstr ""
+"<small><i>Используйте следующие элементы в команде открытия редактора:\n"
+" - <b>%(file_path)s</b>: путь к файлу на который нажали\n"
+" - <b>%(line_number)s</b>: если редактор поддерживает его, можно открыть "
+"файл на необходимой строке, указанной на экране.\n"
+"\n"
+"Например, для sublime, используйте <b>subl %(file_path)s:%(line_number)s</"
+"b>\n"
+"</i></small>"
 
 #: ../data/prefs.glade.h:93
+msgid "Quick open in current terminal"
+msgstr "Быстрое открытие в текущем терминале"
+
+#: ../data/prefs.glade.h:94
 msgid ""
 "Here is the list of supported patterns: (to add your own, please contact the "
 "Guake's authors)"
 msgstr ""
-
-#: ../data/prefs.glade.h:94
-#, fuzzy
-msgid "<b>Quick Open</b>"
-msgstr "<b>Палитра</b>"
+"Здесь указан список поддерживаемых конструкций: (чтобы добавить свою, "
+"пожалуйста свяжитесь с разработчиками Guake)"
 
 #: ../data/prefs.glade.h:95
-msgid "Quick Open"
-msgstr ""
+msgid "<b>Quick Open</b>"
+msgstr "<b>Быстрое открытие</b>"
 
 #: ../data/prefs.glade.h:96
+msgid "Quick Open"
+msgstr "Быстрое открытие"
+
+#: ../data/prefs.glade.h:97
 msgid ""
 "To change a shortcut simply click on its name.\n"
 "To disable a shortcut, press the \"Backspace\" key."
 msgstr ""
+"Чтобы изменить горячую клавишу, нажмите на её имени.\n"
+"Чтобы отключить горячую клавишу, нажмите \"Backspace\"."
 
-#: ../data/prefs.glade.h:98
+#: ../data/prefs.glade.h:99
 msgid "Keyboard shortcuts"
 msgstr "Горячие клавиши"
 
-#: ../data/prefs.glade.h:99
+#: ../data/prefs.glade.h:100
 msgid ""
 "<small><i><b>Note:</b> These options may cause some applications to behave "
 "incorrectly.  They are only here to allow you to work around certain "
@@ -521,7 +540,7 @@ msgstr ""
 "Замечание переводчика: смотри http://trac.guake-terminal.org/trac.cgi/"
 "ticket/41</small>"
 
-#: ../data/prefs.glade.h:100
+#: ../data/prefs.glade.h:101
 msgid ""
 "ASCII DEL\n"
 "Escape sequence\n"
@@ -531,32 +550,37 @@ msgstr ""
 "Escape sequence\n"
 "Control-H"
 
-#: ../data/prefs.glade.h:103
+#: ../data/prefs.glade.h:104
 msgid "_Backspace key generates:"
 msgstr "Клавиша _Backspace генерирует:"
 
-#: ../data/prefs.glade.h:104
+#: ../data/prefs.glade.h:105
 msgid "_Delete key generates:"
 msgstr "Клавиша _Delete генерирует:"
 
-#: ../data/prefs.glade.h:105
+#: ../data/prefs.glade.h:106
 msgid "_Reset Compatibility Options to Defaults"
 msgstr "_Сбросить опции совместимости в значения по умолчанию"
 
-#: ../data/prefs.glade.h:106
+#: ../data/prefs.glade.h:107
 msgid "<b>Keyboard compatibility</b>"
 msgstr "<b>Клавиатурная совместимость</b>"
 
-#: ../data/prefs.glade.h:107
+#: ../data/prefs.glade.h:108
 msgid "Compatibility"
 msgstr "Совместимость"
 
-#: ../src/guake/about.py:47 ../src/guake/gconfhandler.py:401
-#: ../src/guake/guake_app.py:176 ../src/guake/guake_app.py:346
+#: ../src/guake/about.py:47 ../src/guake/gconfhandler.py:427
+#: ../src/guake/guake_app.py:177 ../src/guake/guake_app.py:348
 msgid "Guake Terminal"
-msgstr "Guake Terminal"
+msgstr "Терминал Guake"
 
-#: ../src/guake/gconfhandler.py:402
+#. Adding a new radio button to the tabbar
+#: ../src/guake/gconfhandler.py:365 ../src/guake/guake_app.py:1548
+msgid "Terminal"
+msgstr "Терминал"
+
+#: ../src/guake/gconfhandler.py:428
 #, python-format
 msgid ""
 "A problem happened when binding <b>%s</b> key.\n"
@@ -567,53 +591,48 @@ msgstr ""
 "(иконка в трее была включена)"
 
 #: ../src/guake/guake_app.py:128
-#, fuzzy
 msgid "Do you want to close the tab?"
-msgstr "Вы действительно хотите выйти из Guake!?"
+msgstr "Вы действительно хотите выйти закрыть вкладку?"
 
 #: ../src/guake/guake_app.py:131
-#, fuzzy
 msgid "Do you really want to quit Guake?"
-msgstr "Вы действительно хотите выйти из Guake!?"
+msgstr "Вы действительно хотите выйти из Guake?"
 
 #: ../src/guake/guake_app.py:133
-#, fuzzy
 msgid " and one tab open"
-msgstr "Новая вкладка"
+msgstr " и одна вкладка открыта"
 
 #: ../src/guake/guake_app.py:135
 #, python-brace-format
 msgid " and {0} tabs open"
-msgstr ""
+msgstr " и {0} вкладок открыто"
 
 #: ../src/guake/guake_app.py:138
-#, fuzzy
 msgid "There are no processes running"
-msgstr "<b>Имеется один выполняемый процесс.</b>"
+msgstr "Нет запущенных процессов"
 
 #: ../src/guake/guake_app.py:140
-#, fuzzy
 msgid "There is a process still running"
-msgstr "<b>Имеется один выполняемый процесс.</b>"
+msgstr "Имеется выполняемый процесс"
 
 #: ../src/guake/guake_app.py:142
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "There are {0} processes still running"
-msgstr "<b>Выполняется процессов: %d.</b>"
+msgstr "Выполняется процессов: {0}"
 
-#: ../src/guake/guake_app.py:181
+#: ../src/guake/guake_app.py:182
 msgid "guake-indicator"
 msgstr ""
 
-#: ../src/guake/guake_app.py:181
+#: ../src/guake/guake_app.py:182
 msgid "guake-tray"
 msgstr ""
 
-#: ../src/guake/guake_app.py:185
+#: ../src/guake/guake_app.py:186
 msgid "Show"
-msgstr ""
+msgstr "Показать"
 
-#: ../src/guake/guake_app.py:347
+#: ../src/guake/guake_app.py:349
 #, python-format
 msgid ""
 "Guake is now running,\n"
@@ -622,74 +641,66 @@ msgstr ""
 "Guake запущен,\n"
 "нажмите <b>%s</b> чтобы работать с ним."
 
-#: ../src/guake/guake_app.py:602
+#: ../src/guake/guake_app.py:611
 #, python-format
 msgid "Search on Web: '%s'"
-msgstr ""
+msgstr "Поиск в Интернете: '%s'"
 
-#: ../src/guake/guake_app.py:606
+#: ../src/guake/guake_app.py:616
 msgid "Search on Web (no selection)"
-msgstr ""
+msgstr "Поиск в Интернете (без выборки)"
 
-#: ../src/guake/guake_app.py:612
+#: ../src/guake/guake_app.py:622
 msgid "Open Link: {}"
-msgstr ""
+msgstr "Открыть ссылку: {}"
 
-#: ../src/guake/guake_app.py:615
+#: ../src/guake/guake_app.py:625
 msgid "Open Link..."
-msgstr ""
+msgstr "Открыть ссылку..."
 
-#: ../src/guake/guake_app.py:1265
+#: ../src/guake/guake_app.py:1300
 msgid "Rename tab"
 msgstr "Переименовать вкладку"
 
-#. Adding a new radio button to the tabbar
-#: ../src/guake/guake_app.py:1504
-#, fuzzy
-msgid "Terminal"
-msgstr "Терминал %s"
-
-#: ../src/guake/guake_app.py:1545
+#: ../src/guake/guake_app.py:1591
 msgid "Save to..."
-msgstr ""
+msgstr "Сохранить как..."
 
-#: ../src/guake/guake_app.py:1552 ../src/guake/prefs.py:913
+#: ../src/guake/guake_app.py:1598 ../src/guake/prefs.py:930
 msgid "All files"
-msgstr ""
+msgstr "Все файлы"
 
-#: ../src/guake/guake_app.py:1557
+#: ../src/guake/guake_app.py:1603
 msgid "Text and Logs"
-msgstr ""
+msgstr "Текст и Логи"
 
-#: ../src/guake/guake_app.py:1575
+#: ../src/guake/guake_app.py:1621
 msgid "Find"
-msgstr ""
+msgstr "Найти"
 
-#: ../src/guake/guake_app.py:1577
+#: ../src/guake/guake_app.py:1623
 msgid "Forward"
-msgstr ""
+msgstr "Вперёд"
 
-#: ../src/guake/guake_app.py:1578
+#: ../src/guake/guake_app.py:1624
 msgid "Backward"
-msgstr ""
+msgstr "Назад"
 
 #: ../src/guake/main.py:67
 msgid "Put Guake in fullscreen mode"
-msgstr ""
+msgstr "Перейти в полноэкранный режим"
 
 #: ../src/guake/main.py:71
 msgid "Toggles the visibility of the terminal window"
 msgstr "Переключение видимости окна терминала"
 
 #: ../src/guake/main.py:75
-#, fuzzy
 msgid "Shows Guake main window"
-msgstr "Показать окно настроек Guake"
+msgstr "Показать главное окно Guake"
 
 #: ../src/guake/main.py:79
-#, fuzzy
 msgid "Hides Guake main window"
-msgstr "Показать окно настроек Guake"
+msgstr "Скрыть главное окно Guake"
 
 #: ../src/guake/main.py:83
 msgid "Shows Guake preference window"
@@ -700,13 +711,12 @@ msgid "Shows Guake's about info"
 msgstr "Показать информацию о Guake"
 
 #: ../src/guake/main.py:91
-#, fuzzy
 msgid "Add a new tab (with current directory set to NEW_TAB)"
-msgstr "_Открыть новую вкладку в текущей директории"
+msgstr "Добавить вкладку (с текущей директорией установленной в NEW_TAB)"
 
 #: ../src/guake/main.py:95
 msgid "Select a tab (SELECT_TAB is the index of the tab)"
-msgstr ""
+msgstr "Выбрать вкладку (SELECT_TAB - это индекс вкладок)"
 
 #: ../src/guake/main.py:99
 msgid "Return the selected tab index."
@@ -718,25 +728,30 @@ msgstr "Выполнить произвольную команду в выбра
 
 #: ../src/guake/main.py:107
 msgid "Specify the tab to rename. Default is 0."
-msgstr ""
+msgstr "Определите вкладку для переименования. По-умолчанию 0."
 
 #: ../src/guake/main.py:111
 msgid "Set the hexadecimal (#rrggbb) background color of the selected tab."
-msgstr ""
+msgstr "Укажите цвет фона выбранной вкладки в hex формате (#rrggbb) "
 
 #: ../src/guake/main.py:116
 msgid "Set the hexadecimal (#rrggbb) foreground color of the selected tab."
 msgstr ""
+"Укажите цвет переднего плана выбранной вкладки в hex формате (#rrggbb) "
 
 #: ../src/guake/main.py:122
 msgid ""
 "Rename the specified tab. Reset to default if TITLE is a single dash \"-\"."
 msgstr ""
+"Переименование указанной вкладки. Сброс к имени по-умолчанию, если в TITLE "
+"одиночное тире \"-\"."
 
 #: ../src/guake/main.py:128
 msgid ""
 "Rename the current tab. Reset to default if TITLE is a single dash \"-\"."
 msgstr ""
+"Переименование текущей вкладки. Сброс к имени по-умолчанию, если в TITLE "
+"одиночное тире \"-\"."
 
 #: ../src/guake/main.py:133
 msgid "Says to Guake go away =("
@@ -744,52 +759,51 @@ msgstr "Скажите Guake'у уйти =("
 
 #: ../src/guake/main.py:137
 msgid "Do not execute the start up script"
-msgstr ""
+msgstr "Не запускать скрипт при старте"
 
 #: ../src/guake/main.py:231
 msgid "Guake can not init!"
-msgstr "Ошибка инициализации"
+msgstr "Ошибка инициализации!"
 
 #: ../src/guake/main.py:232
-#, fuzzy
 msgid ""
 "Gconf Error.\n"
 "Have you installed <b>guake.schemas</b> properly?"
 msgstr ""
 "Ошибка Gconf.\n"
-"Вы уверены что установили <b>guake.schemas</b> верно?"
+"Вы уверены, что установили <b>guake.schemas</b> верно?"
 
 #. string to show in prefereces dialog for user shell option
 #: ../src/guake/prefs.py:67
 msgid "<user shell>"
 msgstr "<шелл пользователя>"
 
-#: ../src/guake/prefs.py:454
+#: ../src/guake/prefs.py:467
 msgid "Action"
 msgstr "Действие"
 
-#: ../src/guake/prefs.py:464
+#: ../src/guake/prefs.py:477
 msgid "Shortcut"
-msgstr "Сокращение"
+msgstr "Горячая клавиша"
 
-#: ../src/guake/prefs.py:606 ../src/guake/prefs.py:652
+#: ../src/guake/prefs.py:619 ../src/guake/prefs.py:665
 msgid "Custom"
-msgstr ""
+msgstr "Дополнительно"
 
-#: ../src/guake/prefs.py:909
+#: ../src/guake/prefs.py:926
 msgid "JSON files"
-msgstr ""
+msgstr "JSON файлы"
 
-#: ../src/guake/prefs.py:1002
+#: ../src/guake/prefs.py:1019
 #, python-format
 msgid "The shortcut \"%s\" is already in use."
-msgstr "Сокращение \"%s\" уже занято."
+msgstr "Сокращение \"%s\" уже используется."
 
-#: ../src/guake/prefs.py:1003
+#: ../src/guake/prefs.py:1020
 msgid "Error setting keybinding."
 msgstr "Ошибка назначения клавиш."
 
-#: ../src/guake/prefs.py:1015
+#: ../src/guake/prefs.py:1032
 #, python-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "

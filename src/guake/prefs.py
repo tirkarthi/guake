@@ -81,6 +81,8 @@ HOTKEYS = [
                'label': 'Toggle Hide on Lose Focus'},
               {'key': LKEY('quit'),
                'label': 'Quit'},
+              {'key': LKEY('reset_terminal'),
+               'label': 'Reset terminal'},
               ]},
 
     {'label': 'Tab management',
@@ -138,6 +140,8 @@ HOTKEYS = [
                'label': 'Increase transparency'},
               {'key': LKEY('decrease_transparency'),
                'label': 'Decrease transparency'},
+              {'key': LKEY('toggle_transparency'),
+               'label': 'Toggle transparency'}
               ]},
 
     {'label': 'Clipboard',
@@ -247,11 +251,17 @@ class PrefsCallbacks(object):
         """Changes the activity of start_fullscreen in gconf
         """
         self.client.set_bool(KEY('/general/start_fullscreen'), chk.get_active())
-        
+
     def on_use_vte_titles_toggled(self, chk):
         """Save `use_vte_titles` property value in gconf
         """
         self.client.set_bool(KEY('/general/use_vte_titles'), chk.get_active())
+
+    def on_max_tab_name_length_changed(self, spin):
+        """Changes the value of max_tab_name_length in gconf
+        """
+        val = int(spin.get_value())
+        self.client.set_int(KEY('/general/max_tab_name_length'), val)
 
     def on_mouse_display_toggled(self, chk):
         """Set the 'appear on mouse display' preference in gconf. This
@@ -738,6 +748,10 @@ class PrefsDialog(SimpleGladeApp):
         value = self.client.get_bool(KEY('/general/use_vte_titles'))
         self.get_widget('use_vte_titles').set_active(value)
 
+        # max tab name length
+        value = self.client.get_int(KEY('/general/max_tab_name_length'))
+        self.get_widget('max_tab_name_length').set_value(value)
+
         value = self.client.get_float(KEY('/general/window_height_f'))
         if not value:
             value = self.client.get_int(KEY('/general/window_height'))
@@ -909,7 +923,11 @@ class PrefsDialog(SimpleGladeApp):
         self.reload_erase_combos()
 
         # custom command context-menu configuration file
-        value = os.path.expanduser(self.client.get_string(KEY('/general/custom_command_file')))
+        custom_command_file = self.client.get_string(KEY('/general/custom_command_file'))
+        if custom_command_file:
+            custom_command_file_name = os.path.expanduser(custom_command_file)
+        else:
+            custom_command_file_name = None
         custom_cmd_filter = gtk.FileFilter()
         custom_cmd_filter.set_name(_("JSON files"))
         custom_cmd_filter.add_pattern("*.json")
@@ -918,7 +936,8 @@ class PrefsDialog(SimpleGladeApp):
         all_files_filter.set_name(_("All files"))
         all_files_filter.add_pattern("*")
         self.get_widget('custom_command_file_chooser').add_filter(all_files_filter)
-        self.get_widget('custom_command_file_chooser').set_filename(value)
+        if custom_command_file_name:
+            self.get_widget('custom_command_file_chooser').set_filename(custom_command_file_name)
 
     # -- populate functions --
 

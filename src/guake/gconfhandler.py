@@ -96,6 +96,7 @@ class GConfHandler(object):
         notify_add(KEY('/general/compat_backspace'), self.backspace_changed)
         notify_add(KEY('/general/compat_delete'), self.delete_changed)
         notify_add(KEY('/general/custom_command_file'), self.custom_command_file_changed)
+        notify_add(KEY('/general/max_tab_name_length'), self.max_tab_name_length_changed)
 
     def custom_command_file_changed(self, client, connection_id, entry, data):
         self.guake.load_custom_commands()
@@ -221,6 +222,7 @@ class GConfHandler(object):
             if font_name is None:
                 # Back to gconf
                 font_name = client.get_string(GCONF_MONOSPACE_FONT_PATH)
+            proc.kill()
         else:
             key = KEY('/style/font/style')
             font_name = client.get_string(key)
@@ -345,6 +347,31 @@ class GConfHandler(object):
         for i in self.guake.notebook.iter_terminals():
             i.set_delete_binding(entry.value.get_string())
 
+    def max_tab_name_length_changed(self, client, connection_id, entry, data):
+        """If the gconf var max_tab_name_length be changed, this method will
+        be called and will set the tab name length limit.
+        """
+
+        # avoid get window title before terminal is ready
+        if self.guake.notebook.get_current_terminal().get_window_title() is None:
+            return
+
+        max_name_length = client.get_int(KEY("/general/max_tab_name_length"))
+
+        if max_name_length == 0:
+            max_name_length = None
+
+        vte_titles_on = client.get_bool(KEY("/general/use_vte_titles"))
+        tab_name = self.guake.notebook.get_current_terminal(
+        ).get_window_title() if vte_titles_on else _("Terminal")
+        for tab in self.guake.tabs.get_children():
+            if not getattr(tab, 'custom_label_set', False):
+                tab.set_label(tab_name[:max_name_length])
+            else:
+                # retrieve the custom tab name to restore it
+                tab_custom_name = getattr(tab, 'custom_label_text', False)
+                tab.set_label(tab_custom_name[:max_name_length])
+
 
 class GConfKeyHandler(object):
 
@@ -372,11 +399,11 @@ class GConfKeyHandler(object):
         keys = ['toggle_fullscreen', 'new_tab', 'close_tab', 'rename_current_tab',
                 'previous_tab', 'next_tab', 'clipboard_copy', 'clipboard_paste',
                 'quit', 'zoom_in', 'zoom_out', 'increase_height', 'decrease_height',
-                'increase_transparency', 'decrease_transparency',
+                'increase_transparency', 'decrease_transparency', 'toggle_transparency',
                 "search_on_web", 'move_tab_left', 'move_tab_right',
                 'switch_tab1', 'switch_tab2', 'switch_tab3', 'switch_tab4', 'switch_tab5',
-                'switch_tab6', 'switch_tab7', 'switch_tab8', 'switch_tab9', 'switch_tab10'
-                ]
+                'switch_tab6', 'switch_tab7', 'switch_tab8', 'switch_tab9', 'switch_tab10',
+                'reset_terminal']
         for key in keys:
             notify_add(LKEY(key), self.reload_accelerators)
             self.client.notify(LKEY(key))
@@ -419,6 +446,11 @@ class GConfKeyHandler(object):
         and adds to the main accel_group.
         """
         gets = lambda x: self.client.get_string(LKEY(x))
+        key, mask = gtk.accelerator_parse(gets('reset_terminal'))
+        if key > 0:
+            self.accel_group.connect_group(key, mask, gtk.ACCEL_VISIBLE,
+                                           self.guake.accel_reset_terminal)
+
         key, mask = gtk.accelerator_parse(gets('quit'))
         if key > 0:
             self.accel_group.connect_group(key, mask, gtk.ACCEL_VISIBLE,
@@ -514,6 +546,11 @@ class GConfKeyHandler(object):
         if key > 0:
             self.accel_group.connect_group(key, mask, gtk.ACCEL_VISIBLE,
                                            self.guake.accel_decrease_transparency)
+
+        key, mask = gtk.accelerator_parse(gets('toggle_transparency'))
+        if key > 0:
+            self.accel_group.connect_group(key, mask, gtk.ACCEL_VISIBLE,
+                                           self.guake.accel_toggle_transparency)
 
         for tab in xrange(1, 11):
             key, mask = gtk.accelerator_parse(gets('switch_tab%d' % tab))

@@ -109,6 +109,9 @@ GDK_WINDOW_STATE_ICONIFIED = 2
 GDK_WINDOW_STATE_STICKY = 8
 GDK_WINDOW_STATE_ABOVE = 32
 
+# Transparency max level (should be always 100)
+MAX_TRANSPARENCY = 100
+
 
 log = logging.getLogger(__name__)
 
@@ -167,8 +170,9 @@ class Guake(SimpleGladeApp):
         self.forceHide = False
         self.preventHide = False
 
-        # trayicon!
-        img = pixmapfile('guake-tray.png')
+        # trayicon! Using SVG handles better different OS trays
+        img = pixmapfile('guake-tray.svg')
+
         try:
             import appindicator
         except ImportError:
@@ -248,6 +252,12 @@ class Guake(SimpleGladeApp):
         # holds the timestamp of the previous show/hide action
         self.prev_showhide_time = 0
 
+        # holds transparency level
+        self.transparency = 0
+
+        # Controls the transparency state needed for function accel_toggle_transparency
+        self.transparency_toggled = False
+
         # load cumstom command menu and menuitems from config file
         self.custom_command_menuitem = None
         self.load_custom_commands()
@@ -306,9 +316,6 @@ class Guake(SimpleGladeApp):
 
         self.window.connect('delete-event', destroy)
         self.window.connect('window-state-event', window_event)
-
-        # Flag to completely disable losefocus hiding
-        self.disable_losefocus_hiding = False
 
         # this line is important to resize the main window and make it
         # smaller.
@@ -374,8 +381,10 @@ class Guake(SimpleGladeApp):
     # function to read commands stored at /general/custom_command_file and
     # launch the context menu builder
     def get_custom_commands(self, menu):
-
-        file_name = os.path.expanduser(self.client.get_string(KEY('/general/custom_command_file')))
+        custom_command_file_path = self.client.get_string(KEY('/general/custom_command_file'))
+        if not custom_command_file_path:
+            return
+        file_name = os.path.expanduser(custom_command_file_path)
         if not file_name:
             return
         try:
@@ -556,7 +565,7 @@ class Guake(SimpleGladeApp):
         """Hides terminal main window when it loses the focus and if
         the window_losefocus gconf variable is True.
         """
-        if self.disable_losefocus_hiding or self.showing_context_menu:
+        if self.showing_context_menu:
             return
 
         if self.prompt_dialog is not None:
@@ -1025,6 +1034,7 @@ class Guake(SimpleGladeApp):
         self.client.notify(KEY('/general/history_size'))
         self.client.notify(KEY('/general/show_resizer'))
         self.client.notify(KEY('/general/use_vte_titles'))
+        self.client.notify(KEY('/general/max_tab_name_length'))
         self.client.notify(KEY('/general/quick_open_enable'))
         self.client.notify(KEY('/general/quick_open_command_line'))
         self.client.notify(KEY('/style/cursor_shape'))
@@ -1070,6 +1080,11 @@ class Guake(SimpleGladeApp):
         else:
             gtk.main_quit()
 
+    def accel_reset_terminal(self, *args):
+        """Callback to reset and clean the terminal"""
+        self.reset_terminal()
+        return True
+
     def accel_zoom_in(self, *args):
         """Callback to zoom in.
         """
@@ -1110,6 +1125,8 @@ class Guake(SimpleGladeApp):
         """Callback to increase transparency.
         """
         transparency = self.client.get_int(KEY('/style/background/transparency'))
+        if transparency >= MAX_TRANSPARENCY:
+            return True
         self.client.set_int(KEY('/style/background/transparency'), int(transparency) + 2)
         return True
 
@@ -1117,7 +1134,21 @@ class Guake(SimpleGladeApp):
         """Callback to decrease transparency.
         """
         transparency = self.client.get_int(KEY('/style/background/transparency'))
+        if transparency <= 0:
+            return True
         self.client.set_int(KEY('/style/background/transparency'), int(transparency) - 2)
+        return True
+
+    def accel_toggle_transparency(self, *args):
+        """Callback to toggle transparency.
+        """
+        if self.transparency_toggled:
+            self.client.set_int(KEY('/style/background/transparency'), int(self.transparency))
+            self.transparency_toggled = False
+            return True
+        self.transparency = self.client.get_int(KEY('/style/background/transparency'))
+        self.client.set_int(KEY('/style/background/transparency'), MAX_TRANSPARENCY)
+        self.transparency_toggled = True
         return True
 
     def accel_add(self, *args):
@@ -1202,6 +1233,7 @@ class Guake(SimpleGladeApp):
         """Callback toggle the fullscreen status of the main
         window. Called by the accel key.
         """
+
         if not self.is_fullscreen:
             self.fullscreen()
         else:
@@ -1212,8 +1244,11 @@ class Guake(SimpleGladeApp):
         """Callback toggle whether the window should hide when it loses
         focus. Called by the accel key.
         """
-        # use temporary setting -- don't change conf key
-        self.disable_losefocus_hiding = not self.disable_losefocus_hiding
+
+        if self.client.get_bool(KEY('/general/window_losefocus')):
+            self.client.set_bool(KEY('/general/window_losefocus'), False)
+        else:
+            self.client.set_bool(KEY('/general/window_losefocus'), True)
         return True
 
     def fullscreen(self):
@@ -1228,6 +1263,10 @@ class Guake(SimpleGladeApp):
             self.toolbar.hide()
 
     def unfullscreen(self):
+
+        # Fixes "Guake cannot restore from fullscreen" (#628)
+        self.window.unmaximize()
+
         self.set_final_window_rect()
         self.window.unfullscreen()
         self.is_fullscreen = False
@@ -1261,7 +1300,11 @@ class Guake(SimpleGladeApp):
         tab = self.tabs.get_children()[page]
         # if tab has been renamed by user, don't override.
         if not getattr(tab, 'custom_label_set', False):
-            tab.set_label(vte.get_window_title())
+            vte_title = vte.get_window_title()
+            max_name_length = self.client.get_int(KEY("/general/max_tab_name_length"))
+            if len(vte_title) > max_name_length and max_name_length is not 0:
+                vte_title = vte_title[:max_name_length]
+            tab.set_label(vte_title)
 
     def on_rename_current_tab_activate(self, *args):
         """Shows a dialog to rename the current tab.
@@ -1290,16 +1333,24 @@ class Guake(SimpleGladeApp):
         entry.reparent(vbox)
 
         # don't hide on lose focus until the rename is finished
-        current_hide_setting = self.disable_losefocus_hiding
-        self.disable_losefocus_hiding = True
+        self.preventHide = True
         response = dialog.run()
-        self.disable_losefocus_hiding = current_hide_setting
+        self.preventHide = False
 
         if response == gtk.RESPONSE_ACCEPT:
+            max_name_length = self.client.get_int(KEY("/general/max_tab_name_length"))
             new_text = entry.get_text()
+            if len(new_text) > max_name_length and max_name_length is not 0:
+                new_text = new_text[:max_name_length]
+
             self.selected_tab.set_label(new_text)
             # if user sets empty name, consider he wants default behavior.
             setattr(self.selected_tab, 'custom_label_set', bool(new_text))
+
+            # holds custom label name of the tab,
+            # we need this to restore the name if the max length is changed
+            setattr(self.selected_tab, 'custom_label_text', new_text)
+
             # trigger titling handler in case that custom label has been reset
             current_vte = self.notebook.get_current_terminal()
             current_vte.emit('window-title-changed')
@@ -1518,7 +1569,6 @@ class Guake(SimpleGladeApp):
         label = box.terminal.get_window_title() or _("Terminal")
         tabs = self.tabs.get_children()
         parent = tabs and tabs[0] or None
-
         bnt = gtk.RadioButton(group=parent, label=label, use_underline=False)
         bnt.set_property('can-focus', False)
         bnt.set_property('draw-indicator', False)
